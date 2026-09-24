@@ -1,0 +1,36 @@
+app:
+  name: "BDS-39 Counterfactual Dynamic Pricing System"
+  version: "0.1.0"
+  environment: "development"
+  debug: true
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  reload: true
+  cors_origins:
+    - "http://localhost:8501"
+    - "http://127.0.0.1:8501"
+    - "http://localhost:3000"
+
+dashboard:
+  host: "0.0.0.0"
+  port: 8501
+  api_base_url: "http://localhost:8000/api/v1"
+
+auth:
+  algorithm: "HS256"
+  access_token_expire_minutes: 60
+  max_failed_logins: 5
+  lockout_duration_minutes: 15
+
+database:
+  url: "sqlite:///./data/bds39_pricing.db"
+
+mlflow:
+  tracking_uri: "sqlite:///./data/mlflow.db"
+  experiment_name: "bds39_counterfactual_pricing"
+
+logging:
+  level: "INFO"
+  format: "json"

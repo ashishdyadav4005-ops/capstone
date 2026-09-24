@@ -1,0 +1,42 @@
+baseline_models:
+  cost_plus:
+    default_markup: 0.30
+  last_price:
+    lookback_days: 1
+  naive_lightgbm:
+    n_estimators: 150
+    learning_rate: 0.05
+    max_depth: 6
+    num_leaves: 31
+    random_state: 42
+
+causal_model:
+  method: "dml" # Double Machine Learning
+  y_model: "lightgbm" # Predict demand from confounders
+  t_model: "lightgbm" # Predict treatment (price) from confounders
+  n_splits: 5 # Cross-fitting folds
+  y_params:
+    n_estimators: 150
+    learning_rate: 0.05
+    max_depth: 6
+    num_leaves: 31
+    random_state: 42
+  t_params:
+    n_estimators: 150
+    learning_rate: 0.05
+    max_depth: 6
+    num_leaves: 31
+    random_state: 42
+  confidence_level: 0.95
+
+sensitivity:
+  simulation_strengths: [0.0, 0.1, 0.25, 0.5, 0.75, 1.0]
+  omitted_confounder: "unobserved_demand_shock"
+
+evaluation:
+  metrics:
+    - "mae"
+    - "rmse"
+    - "mape"
+    - "elasticity_bias"
+    - "coverage_95"

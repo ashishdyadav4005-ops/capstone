@@ -1,0 +1,29 @@
+guardrails:
+  # 1. Capacity Constraints
+  capacity:
+    enabled: true
+    max_utilization_threshold: 0.98 # Expected demand cannot exceed 98% capacity
+    buffer_units: 5
+
+  # 2. Price Volatility Guardrails
+  volatility:
+    enabled: true
+    max_price_change_pct: 0.15 # Max 15% price adjustment relative to current price
+    max_day_to_day_variance: 0.08 # Max 8% day-to-day swing
+
+  # 3. Fairness and Subgroup Protection
+  fairness:
+    enabled: true
+    max_location_disparity_pct: 0.10 # Max 10% price gap across locations for identical product
+    max_customer_group_disparity_pct: 0.12 # Max 12% price gap across customer groups
+    max_group_revenue_harm_pct: 0.05 # Subgroup consumer surplus harm tolerance
+
+  # 4. Profit Margin Floor
+  margin:
+    enabled: true
+    min_margin_pct_over_cost: 0.15 # Price >= Cost * 1.15
+    absolute_min_margin_currency: 2.0 # Absolute floor above cost
+
+enforcement:
+  mode: "strict" # "strict" raises infeasibility, "soft" penalizes in objective function
+  auto_fallback_to_current_price: true

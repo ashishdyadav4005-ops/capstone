@@ -1,0 +1,15 @@
+optimizer:
+  method: "SLSQP"
+  tolerance: 1e-6
+  max_iterations: 200
+  grid_search_points: 50
+  candidate_price_range: [-0.25, 0.25] # +/- 25% relative to current price
+  monte_carlo_samples: 500
+
+objective:
+  type: "expected_revenue" # or "expected_profit"
+  risk_aversion: 0.05 # Penalty parameter for demand variance
+
+fallback:
+  strategy: "conservative_feasible"
+  max_deviation_from_current: 0.05

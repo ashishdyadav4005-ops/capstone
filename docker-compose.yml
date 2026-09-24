@@ -1,0 +1,26 @@
+services:
+  pricing-app:
+    image: ashishyadav455/pricing-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bds39_pricing_app
+    ports:
+      - "8000:8000"
+      - "8501:8501"
+      - "5000:5000"
+    environment:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=INFO
+    volumes:
+      - pricing_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  pricing_data:
