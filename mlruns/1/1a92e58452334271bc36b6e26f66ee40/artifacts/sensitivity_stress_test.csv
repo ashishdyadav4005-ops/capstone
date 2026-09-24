@@ -1,0 +1,7 @@
+confounder_strength,estimated_elasticity,baseline_elasticity,elasticity_bias,is_economically_valid
+0.0,-0.8361,-0.8361,0.0,True
+0.1,1.1609,-0.8361,1.997,False
+0.25,1.612,-0.8361,2.448,False
+0.5,1.6837,-0.8361,2.5198,False
+0.75,1.7048,-0.8361,2.5409,False
+1.0,1.7205,-0.8361,2.5566,False
